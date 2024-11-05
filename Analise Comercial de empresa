@@ -1,10 +1,19 @@
-importação de dados utilizando dataframe e pandas
+#importação de dados utilizando dataframe e pandas
 import pandas as pd
 import matplotlib.pyplot as plt
 dados=pd.read_excel('/content/drive/MyDrive/Dados2.xls', sheet_name='comercial ')
 df=pd.DataFrame(dados)
 
 meses=['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez']
+data=df['Data'][0:48]
+
+int_total=df['Interessado'][0:48]
+emp_novas=df['Empresas Novas'][0:48]
+emp_canceladas=df['Empresas Canceladas'][0:48]
+emp_ativas=df['Empresas Ativas'][0:48]
+var_mensal=df['Variação Mensal'][0:48]
+efet_vendas=df['Efetivação de vendas'][0:48]
+
 #Dados do ano 2021
 demanda_21=df['Interessado'][0:12]
 vendas_21=df['Empresas Novas'][0:12]
@@ -12,10 +21,75 @@ cancel_21=df['Empresas Canceladas'][0:12]
 emp_ativas_21=df['Empresas Ativas'][0:12]
 var_mensal_21=df['Variação Mensal'][0:12]
 efet_vendas_21=df['Efetivação de vendas'][0:12]
-eftvd=(vendas_21/demanda_21)*100
+
 mean_demanda_21 = demanda_21.mean()
 sun_demanda_21 = demanda_21.sum()
 mode_demanda_21 = demanda_21.mode()
 std_demanda_21 = demanda_21.std()
 max_demanda_21 = demanda_21.max()
 min_demanda_21 = demanda_21.min()
+
+#ano22
+demanda_22=df['Interessado'][12:24]
+vendas_22=df['Empresas Novas'][12:24]
+cancel_22=df['Empresas Canceladas'][12:24]
+emp_ativas_22=df['Empresas Ativas'][12:24]
+var_mensal_22=df['Variação Mensal'][12:24]
+efet_vendas_22=df['Efetivação de vendas'][12:24]
+
+mean_demanda_22 = demanda_22.mean()
+sun_demanda_22 = demanda_22.sum()
+mode_demanda_22 = demanda_22.mode()
+std_demanda_22 = demanda_22.std()
+max_demanda_22 = demanda_22.max()
+min_demanda_22 = demanda_22.min()
+
+
+#ano23
+demanda_23=df['Interessado'][24:36]
+vendas_23=df['Empresas Novas'][24:36]
+cancel_23=df['Empresas Canceladas'][24:36]
+emp_ativas_23=df['Empresas Ativas'][24:36]
+var_mensal_22=df['Variação Mensal'][24:36]
+efet_vendas_23=df['Efetivação de vendas'][24:36]
+
+mean_demanda_23 = demanda_23.mean()
+sun_demanda_23 = demanda_23.sum()
+mode_demanda_23 = demanda_23.mode()
+std_demanda_23 = demanda_23.std()
+min_demanda_23 = demanda_23.min()
+max_demanda_23 = demanda_23.max()
+
+
+#ano24
+demanda_24=df['Interessado'][36:48]
+vendas_24=df['Empresas Novas'][36:48]
+cancel_24=df['Empresas Canceladas'][36:48]
+emp_ativas_24=df['Empresas Ativas'][36:48]
+var_mensal_24=df['Variação Mensal'][36:48]
+efet_vendas_24=df['Efetivação de vendas'][36:48]
+
+mean_demanda_24 = demanda_24.mean()
+sun_demanda_24 = demanda_24.sum()
+mode_demanda_24 = demanda_24.mode()
+std_demanda_24 = demanda_24.std()
+min_demanda_24 = demanda_24.min()
+max_demanda_24 = demanda_24.max()
+
+
+x= data
+y= emp_novas
+plt.figure()
+ax1 = plt.subplot()
+ax1.plot(x,y, '-k', linewidth=2)#o sinal de menos significa o tipo de linha e o k significa a cor da linha, e o linewidth significa a grossura da linha
+ax1.set_xlabel('Meses', fontsize=12)
+ax1.set_ylabel('Vendas', fontsize=12, color='black')
+ax1.set_title('Vendas por cancelamento ', fontsize=12)
+#ax1.text(x='03/21', y=22, s='Pico de  vendas no ano', fontsize=10, color='k', weight='bold', horizontalalignment='right')
+
+
+ax2 = ax1.twinx()
+ax2.plot(x, emp_canceladas,'-b', linewidth=2)
+ax2.set_ylabel('Cancelamento', fontsize=12, color='blue')
+#ax2.text(x='07/21', y=62, s='Pico de Cancelados ', fontsize=10, color='b', weight='bold',  horizontalalignment='left')
+plt.show()
