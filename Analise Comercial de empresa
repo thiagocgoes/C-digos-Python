@@ -1,0 +1,21 @@
+importação de dados utilizando dataframe e pandas
+import pandas as pd
+import matplotlib.pyplot as plt
+dados=pd.read_excel('/content/drive/MyDrive/Dados2.xls', sheet_name='comercial ')
+df=pd.DataFrame(dados)
+
+meses=['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez']
+#Dados do ano 2021
+demanda_21=df['Interessado'][0:12]
+vendas_21=df['Empresas Novas'][0:12]
+cancel_21=df['Empresas Canceladas'][0:12]
+emp_ativas_21=df['Empresas Ativas'][0:12]
+var_mensal_21=df['Variação Mensal'][0:12]
+efet_vendas_21=df['Efetivação de vendas'][0:12]
+eftvd=(vendas_21/demanda_21)*100
+mean_demanda_21 = demanda_21.mean()
+sun_demanda_21 = demanda_21.sum()
+mode_demanda_21 = demanda_21.mode()
+std_demanda_21 = demanda_21.std()
+max_demanda_21 = demanda_21.max()
+min_demanda_21 = demanda_21.min()
