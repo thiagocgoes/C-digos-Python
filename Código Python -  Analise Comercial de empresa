@@ -1,6 +1,7 @@
 #importação de dados utilizando dataframe e pandas
 import pandas as pd
 import matplotlib.pyplot as plt
+import matplotlib.dates as mdt
 dados=pd.read_excel('/content/drive/MyDrive/Dados2.xls', sheet_name='comercial ')
 df=pd.DataFrame(dados)
 
@@ -80,6 +81,7 @@ max_demanda_24 = demanda_24.max()
 x= data
 y= emp_novas
 plt.figure()
+plt.gca().xaxis.set_major_locator(mdt.DayLocator(interval=5))
 ax1 = plt.subplot()
 ax1.plot(x,y, '-k', linewidth=2)#o sinal de menos significa o tipo de linha e o k significa a cor da linha, e o linewidth significa a grossura da linha
 ax1.set_xlabel('Meses', fontsize=12)
