@@ -1,4 +1,4 @@
-#importação de dados utilizando dataframe e pandas
+'''#importação de dados utilizando dataframe e pandas
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdt
@@ -94,4 +94,4 @@ ax2 = ax1.twinx()
 ax2.plot(x, emp_canceladas,'-b', linewidth=2)
 ax2.set_ylabel('Cancelamento', fontsize=12, color='blue')
 #ax2.text(x='07/21', y=62, s='Pico de Cancelados ', fontsize=10, color='b', weight='bold',  horizontalalignment='left')
-plt.show()
+plt.show()'''
