@@ -1,0 +1,67 @@
+''' import pandas as pd
+demanda_1 = pd.read_csv('/content/drive/MyDrive/demanda1.csv', sep=';')#utilizado sep=';' foi utilizado para informar ao leitor do arquivo que o delimitador é o ';'(ponto e virgula) e não a ','(virgula)
+df=pd.DataFrame(demanda_1)
+
+#transofrmando o nome da coluna
+df.rename(columns={'nu_remuneracao': 'Valor'}, inplace = True)
+df.isnull()
+linhas_com_nulos = df[df.isnull().any(axis=1)]
+
+# Encontrar linhas que contêm a string 'exemplo' na coluna 'nome_da_coluna'
+linhas_com_string = df[df['Valor'].str.contains(' ', na=False)]
+
+#utilizado a função replace pois estava dando erro no código e informava que possuia uma string na coluna remuneração, e esse código substituia as virgulas pelo ponto
+df['Valor'] = df['Valor'].str.replace(',','.')
+
+# transformando a coluna nu_remuneração em float para ter a média salarial
+df['Valor'] = df['Valor'].astype(float) 
+
+#Calculando Outliers
+#Calculando Q1, Q3 e IQR
+Q1 = df['Valor'].quantile(0.25)
+Q3 = df['Valor'].quantile(0.75)
+IQR = Q3 - Q1
+
+# Identificando outliers
+outliers = (df['Valor'] < (Q1 - 1.5 * IQR)) | (df['Valor'] > (Q3 + 1.5 * IQR))
+
+# Exibindo outliers
+print(outliers)
+
+#removendo os outliers
+def remove_outliers_iqr(df, colunas):
+  """
+  Remove outliers de um DataFrame usando o método IQR.
+
+  Args:
+    df: O DataFrame Pandas.
+    colunas: Uma lista de colunas para verificar outliers.
+
+  Returns:
+    Um novo DataFrame com os outliers removidos.
+  """
+  df_sem_outliers = df.copy()
+  for coluna in colunas:
+    Q1 = df['Valor'].quantile(0.25)
+    Q3 = df['Valor'].quantile(0.75)
+    IQR = Q3 - Q1
+    limite_inferior = Q1 - 1.5 * IQR
+    limite_superior = Q3 + 1.5 * IQR
+    df_sem_outliers = df_sem_outliers[
+      (df_sem_outliers['Valor'] >= limite_inferior) &
+      (df_sem_outliers['Valor'] <= limite_superior)
+    ]
+  return df_sem_outliers
+
+# Exemplo de uso
+colunas_para_remover_outliers = ['Valor']
+df_limpo = remove_outliers_iqr(df, colunas_para_remover_outliers)
+
+# utilizei o valor >=1 na remuneração pois entendo que acima ou igual a esse valor seria ativo e quando a remuneração é zero entendo que esta inativo.
+ativos = df[(df['Valor'] >= 1) & (df['nm_mun'] == 'Joinville')] 
+
+#criando a remuneração média por setor e o código round(2) para trabalhar com apenas duas casas decimais
+ativos = df.groupby('setor')['Valor'].mean().round(2)
+
+print(ativos)
+ativos.to_excel('salario_setores.xlsx')'''
